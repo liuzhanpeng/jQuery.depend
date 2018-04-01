@@ -354,6 +354,17 @@
         },
 
         /**
+         * 判断元素的值是否和给定数组参数内的任何值都不相等
+         *
+         * @param {Object} $selector 元素对象
+         * @param {Array} param 参数 
+         * @return {boolean}
+         */
+        notAny: function($selector, param) {
+            return !this.any($selector, param);
+        },
+
+        /**
          * 判断元素的值是否包含指定值
          *
          * @param {Object} $selector 元素对象
@@ -371,6 +382,18 @@
 
             val = val.sort().toString();
             return val.indexOf(param) !== 1;
+        },
+
+
+        /**
+         * 判断元素的值是否不包含指定值
+         *
+         * @param {Object} $selector 元素对象
+         * @param {string|Array} param 参数 
+         * @return {boolean}
+         */
+        notContain: function($selector, param) {
+            return !$this.contain($selector, param);
         }
 
     };
