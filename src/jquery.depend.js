@@ -331,6 +331,7 @@
 
         /**
          * 判断元素的值是否和给定数组参数内的某值相等
+         *
          * @param {Object} $selector 元素对象
          * @param {Array} param 参数 
          * @return {boolean}
@@ -340,10 +341,36 @@
                 $.error('any规则参数必须为数组');
             }
             var val = Depend.getElementValue($selector);
-            if ($.isArray(val) && val.length === 1) {
-                val = val[0]; 
+            if ($.isArray(val)) {
+                for (var i in val) {
+                    if ($.inArray(val[i], param) !== -1) {
+                        return true;
+                    }
+                }
+                return false;
             }
+
             return $.inArray(val, param) !== -1;
+        },
+
+        /**
+         * 判断元素的值是否包含指定值
+         *
+         * @param {Object} $selector 元素对象
+         * @param {string|Array} param 参数 
+         * @return {boolean}
+         */
+        contain: function($selector, param) {
+            var val = Depend.getElementValue($selector);
+            if (!$.isArray(val)) {
+                $.error('contain规则元素的值必须为数组');
+            }
+            if ($.isArray(param)) {
+                param = param.sort().toString();
+            } 
+
+            val = val.sort().toString();
+            return val.indexOf(param) !== 1;
         }
 
     };
