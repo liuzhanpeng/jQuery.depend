@@ -1,0 +1,24 @@
+{
+  "name": "jquery.depend",
+  "version": "1.0.0",
+  "description": "Change the element (enable/disabled or show/hide  etc.) depend on others elements.",
+  "main": "./dist/jquery.depend.min.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liuzhanpeng/jQuery.depend.git"
+  },
+  "author": "Zhanpeng Liu <liuzhanpeng@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/liuzhanpeng/jQuery.depend/issues"
+  },
+  "homepage": "https://github.com/liuzhanpeng/jQuery.depend#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^3.0.0"
+  }
+}

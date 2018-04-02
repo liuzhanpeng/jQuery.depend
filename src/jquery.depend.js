@@ -381,7 +381,7 @@
             } 
 
             val = val.sort().toString();
-            return val.indexOf(param) !== 1;
+            return val.indexOf(param) !== -1;
         },
 
 
