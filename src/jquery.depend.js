@@ -5,7 +5,6 @@
  * Copyright (c) 2017-2018 Zhanpeng Liu <liuzhanpeng@gmail.com>
  * Released under the MIT license
  */
-
 ;(function(factory) {
     'use strict';
     if (typeof define === 'function' && define.amd) {
@@ -362,7 +361,7 @@
          * @return {boolean}
          */
         notAny: function($selector, param) {
-            return !this.test('in', param); 
+            return !this.test('any', param); 
         },
 
         /**
