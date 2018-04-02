@@ -337,9 +337,9 @@
          * @param {Array} param 参数 
          * @return {boolean}
          */
-        in: function($selector, param) {
+        any: function($selector, param) {
             if (!$.isArray(param)) {
-                $.error('in|notIn规则参数必须为数组');
+                $.error('any|notAny规则参数必须为数组');
             }
             var val = Depend.getElementValue($selector);
             if ($.isArray(val)) {
@@ -361,7 +361,7 @@
          * @param {Array} param 参数 
          * @return {boolean}
          */
-        notIn: function($selector, param) {
+        notAny: function($selector, param) {
             return !this.test('in', param); 
         },
 
