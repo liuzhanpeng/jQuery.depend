@@ -52,7 +52,7 @@
     $('#form1 [name="test4"]').depend({
         '#form1 [name="test3[]"]': {
             rule: {
-                contain: '博士伦'
+                notAny: ['博士伦']
             }
         }
     });

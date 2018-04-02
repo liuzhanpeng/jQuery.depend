@@ -326,7 +326,7 @@
          * @return {boolean}
          */
         notEqual: function($selector, param) {
-            return !this.equal($selector, param); 
+            return !this.test('equal', param); 
         },
 
         /**
@@ -361,7 +361,7 @@
          * @return {boolean}
          */
         notAny: function($selector, param) {
-            return !this.any($selector, param);
+            return !this.test('any', param);
         },
 
         /**
@@ -393,7 +393,7 @@
          * @return {boolean}
          */
         notContain: function($selector, param) {
-            return !$this.contain($selector, param);
+            return !$this.test('contain', param);
         }
 
     };
