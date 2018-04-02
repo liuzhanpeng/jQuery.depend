@@ -192,7 +192,7 @@
                 });
                 $selector.on(event, function(e) {
                     var result = $this.ruleInspectorGroup.check();
-                    if ($this.options.debug) {
+                    if ($this.options.debug === true) {
                         console.log('元素:<' + $this.$element.selector + '>;依赖元素:<' + selector + '>;事件:' + e.type + ';检查结果:' + result);
                     }
 
@@ -280,9 +280,9 @@
      * @return {string|Array}
      */
     Depend.getElementValue = function($element) {
-        if ($element.is('input') && $element.attr('type') === 'radio') {
+        if ($element.is('input:radio')) {
             return $element.filter(':checked').val();
-        } else if ($element.is('input') && $element.attr('type') === 'checkbox') {
+        } else if ($element.is('input:checkbox')) {
             var vals = [];
             $element.filter(':checked').each(function(i, item) {
                 vals.push($(item).val()); 
@@ -330,15 +330,16 @@
         },
 
         /**
-         * 判断元素的值是否和给定数组参数内的某值相等
+         * 判断元素的值是否存在于给定数组参数中
+         * 如果元素返回值为数组，则数组中任何值存在于param中表示规则通过
          *
          * @param {Object} $selector 元素对象
          * @param {Array} param 参数 
          * @return {boolean}
          */
-        any: function($selector, param) {
+        in: function($selector, param) {
             if (!$.isArray(param)) {
-                $.error('any规则参数必须为数组');
+                $.error('in|notIn规则参数必须为数组');
             }
             var val = Depend.getElementValue($selector);
             if ($.isArray(val)) {
@@ -354,47 +355,66 @@
         },
 
         /**
-         * 判断元素的值是否和给定数组参数内的任何值都不相等
+         * 判断元素的值是否不存在于给定数组参数中
          *
          * @param {Object} $selector 元素对象
          * @param {Array} param 参数 
          * @return {boolean}
          */
-        notAny: function($selector, param) {
-            return !this.test('any', param);
+        notIn: function($selector, param) {
+            return !this.test('in', param); 
         },
 
         /**
          * 判断元素的值是否包含指定值
+         * 如果param为数组，则param中的所有值都包含在元素的值中
          *
          * @param {Object} $selector 元素对象
-         * @param {string|Array} param 参数 
+         * @param {string} param 参数 
          * @return {boolean}
          */
         contain: function($selector, param) {
             var val = Depend.getElementValue($selector);
             if (!$.isArray(val)) {
-                $.error('contain规则元素的值必须为数组');
+                $.error('contain规则只支持近观回值为数组的元素(如:checkbox)');
             }
+
             if ($.isArray(param)) {
-                param = param.sort().toString();
-            } 
+                for (var i in param) {
+                    if ($.inArray(param[i], val) === -1) {
+                        return false;
+                    }
+                }
+                return true;
+            }
 
-            val = val.sort().toString();
-            return val.indexOf(param) !== -1;
+            return $.inArray(param, val) !== -1;
         },
-
 
         /**
          * 判断元素的值是否不包含指定值
          *
          * @param {Object} $selector 元素对象
-         * @param {string|Array} param 参数 
+         * @param {string} param 参数 
          * @return {boolean}
          */
         notContain: function($selector, param) {
-            return !$this.test('contain', param);
-        }
+            return !this.test('contain', param);
+        },
+
+        /**
+         * 判断元素checked状态是否等于给定参数
+         *
+         * @param {Object} $selector 元素对象
+         * @param {boolean} param 参数 
+         * @return {boolean}
+         */
+        checked: function($selector, param) {
+            if (typeof param !== 'boolean') {
+                $.error('checked规则参数只能是true或false');
+            }
+            return $selector.prop('checked') === param; 
+        },
 
     };
     
