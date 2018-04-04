@@ -2,7 +2,7 @@
  * jquery.depend v1.0.0
  * https://github.com/liuzhanpeng/jquery.depend
  *
- * Copyright (c) 2017-2018 Zhanpeng Liu <liuzhanpeng@gmail.com>
+ * Copyright (c) 2018 Zhanpeng Liu <liuzhanpeng@gmail.com>
  * Released under the MIT license
  */
 ;(function(factory) {
